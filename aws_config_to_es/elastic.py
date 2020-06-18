@@ -37,16 +37,17 @@ class ElasticSearch(object):
 
         json_message = json.dumps(json_message_dict)
 
+        headers = {"Content-Type":"application/json"}
         self.log.info("adding item into ES: " + str(json_message_dict))
         if index_id:
             response = requests.put(self.connections + "/" +
                                     index_name + "/" +
                                     doc_type + "/" +
-                                    index_id, data=json_message)
+                                    index_id, data=json_message, headers=headers)
         else:
             response = requests.post(self.connections + "/" +
                                      index_name + "/" +
-                                     doc_type, data=json_message)
+                                     doc_type, data=json_message, headers=headers)
 
         self.log.info(
             "response: " + str(
