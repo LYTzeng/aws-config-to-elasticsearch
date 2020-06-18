@@ -4,9 +4,9 @@
 ### Vladimir Budilov
 
 ### Modified by Oscar Li-Yen Tseng
-:::info
-The [original repo](https://github.com/awslabs/aws-config-to-elasticsearch) only supports Elasticsearch 4 and Kibana 4. This fork adds support to Elasticsearch/Kibana **7.6** and **Kibana dashboard** template.
-:::
+> ℹ️
+> The [original repo](https://github.com/awslabs/aws-config-to-elasticsearch) only supports Elasticsearch 4 and Kibana 4. This fork adds support to Elasticsearch/Kibana **7.6** and **Kibana dashboard** template.
+
 ![](/images/AWS_Config.png)
 
 ### What problem does this app solve?
@@ -65,10 +65,10 @@ usage: esingest.py [-h] [--region REGION] --destination DESTINATION [--verbose]
 2. You should see a new dashboard named **AWS Config** under the list of *Saved Objects*. Click on the dashboard **AWS Config** and have fun. 😎
 
 ### Cleanup
-:::danger
-DON'T RUN THESE COMMANDS IF YOU DON'T WANT TO LOSE EVERYTHING IN YOUR ELASTICSEARCH NODE!
+> :warning:
+> DON'T RUN THESE COMMANDS IF YOU DON'T WANT TO LOSE EVERYTHING IN YOUR ELASTICSEARCH NODE!
 
-_THIS COMMAND WILL ERASE EVERYTHING FROM YOUR ES NODE --- BE CAREFUL BEFORE RUNNING_
+> :warning: _THIS COMMAND WILL ERASE EVERYTHING FROM YOUR ES NODE --- BE CAREFUL BEFORE RUNNING_
 :::
 ```bash
 curl -XDELETE localhost:9200/_all
