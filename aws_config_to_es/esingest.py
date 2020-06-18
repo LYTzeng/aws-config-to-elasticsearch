@@ -14,11 +14,13 @@ from botocore.client import Config
 import elastic
 from configservice_util import ConfigServiceUtil
 
+import re # regex
+
 DOWNLOADED_SNAPSHOT_FILE_NAME = "/tmp/configsnapshot" + \
                                 str(time.time()) + ".json.gz"
 
 REGIONS = [
-    'us-west-1', 'us-west-2', 'eu-west-1', 'us-east-1',
+    'us-west-1', 'us-west-2', 'eu-west-1', 'us-east-1', 'us-east-2',
     'eu-central-1', 'ap-southeast-1', 'ap-northeast-1',
     'ap-southeast-2', 'ap-northeast-2', 'sa-east-1']
 
@@ -61,7 +63,9 @@ def load_data_into_es(filename, iso_now_time, es):
             for item in configuration_items:
                 try:
                     indexname = item.get("resourceType").lower()
-                    typename = item.get("awsRegion").lower()
+                    indexname = re.sub('::', '-', indexname)
+                    # Elasticsearch document type was deprecated since version 6
+                    typename = "none"
 
                     verbose_log.info(
                         "storing in ES: " + str(item.get("resourceType")))

@@ -1,10 +1,10 @@
-Import your AWS Config Snapshots into ElasticSearch
-===================================================
-### Author: Vladimir Budilov
-* [YouTube](https://www.youtube.com/channel/UCBl-ENwdTlUsLY05yGgXyxw)
-* [LinkedIn](https://www.linkedin.com/in/vbudilov/)
-* [Medium](https://medium.com/@budilov)
-* [Twitter](https://twitter.com/VladimirBudilov)
+# Import your AWS Config Snapshots into ElasticSearch
+***
+## Author
+### Vladimir Budilov
+
+### Modified by **Oscar Li-Yen Tseng**
+The [original repo](https://github.com/awslabs/aws-config-to-elasticsearch) only supports Elasticsearch 4 and Kibana 4. This fork adds support to Elasticsearch/Kibana 7.6.
 
 ### What problem does this app solve?
 You have a lot of resources in your AWS account and want to search and visualize them. For example, you'd like to know your EC2 Avaiability Zone distribution or how many EC2 instances are uzing a particular Security Group
@@ -17,13 +17,13 @@ for a more in-depth explanation of this solution.
 
 ### Getting the code
 ```
-git clone --depth 1 git@github.com:awslabs/aws-config-to-elasticsearch.git
+git clone https://github.com/LYTzeng/aws-config-to-elasticsearch.git
 ```
 
 ### The code
 #### Prerequisites
 * Python 2.7
-* An ELK stack, up and running
+* An ELK stack, up and running **(At least Elasticsearch 7.6 and Kibana 7.6 installed)**
 * Install the required packages. The requirements.txt file is included with this repo.
 ```
 pip install -r ./requirements.txt
@@ -61,7 +61,7 @@ curl -XDELETE localhost:9200/_all
 
 In order to avoid losing all of your data, you can just iterate over all of your indexes and delete them that way. The below command will print out all of your indexes that contain 'aws::'. You can then run a DELETE on just these indexes.
 ```bash
-curl 'localhost:9200/_cat/indices' | awk '{print $3}' | grep "aws::"
+curl 'localhost:9200/_cat/indices' | awk '{print $3}' | grep "aws-"
 ```
 
 Also delete the template which allows for creationg of a 'raw' string value alongside every 'analyzed' one
